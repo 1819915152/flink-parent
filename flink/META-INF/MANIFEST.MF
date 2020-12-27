@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: cn.qphone.flink.day1.Demo1_WordCount_Scala
+

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cn.qphone</groupId>
+    <artifactId>flink-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>flink</module>
+    </modules>
+
+    <properties>
+        <!-- 1. 版本 -->
+        <!-- scala版本 -->
+        <scala-version>2.11.8</scala-version>
+        <!-- spark版本 -->
+        <spark-version>2.2.0</spark-version>
+        <!-- flink版本 -->
+        <flink-version>1.9.1</flink-version>
+        <flink-redis-version>1.1.5</flink-redis-version>
+
+
+        <!-- log4j版本 -->
+        <log4j-version>1.2.17</log4j-version>
+        <!-- mysql jdbc版本 -->
+        <mysql-jdbc-version>5.1.47</mysql-jdbc-version>
+
+        <!-- kafka 版本 -->
+        <kafka-version>2.4.1</kafka-version>
+
+        <!-- curator 版本-->
+        <curator-version>2.6.0</curator-version>
+
+        <!-- hbase 版本-->
+        <hbase-version>1.2.1</hbase-version>
+
+        <!-- scala jdbc 版本 -->
+        <scalikejdbc-version>3.2.0</scalikejdbc-version>
+
+        <!-- jedis 版本 -->
+        <jedis-version>2.1.0</jedis-version>
+
+        <!-- es 版本 -->
+        <es-version>6.5.3</es-version>
+
+        <fastjson-version>1.2.71</fastjson-version>
+
+        <lombok-version>1.18.8</lombok-version>
+
+        <!-- java compiler version-->
+        <java-compiler-version>1.8</java-compiler-version>
+
+        <!-- scala插件版本 -->
+        <scala-tools-version>2.15.2</scala-tools-version>
+
+        <!-- 打包插件版本 -->
+        <assembly-plugin-version>3.2.0</assembly-plugin-version>
+
+        <!-- 2. 项目工程的编码格式 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- 3. 编译器的版本 -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- flink java -->
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-java</artifactId>
+                <version>${flink-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-streaming-java_2.11</artifactId>
+                <version>${flink-version}</version>
+            </dependency>
+
+            <!-- flink scala -->
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-scala_2.11</artifactId>
+                <version>${flink-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-streaming-scala_2.11</artifactId>
+                <version>${flink-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-jdbc_2.11</artifactId>
+                <version>1.9.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-connector-kafka_2.11</artifactId>
+                <version>1.9.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-connector-redis_2.11</artifactId>
+                <version>${flink-redis-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka-clients</artifactId>
+                <version>${kafka-version}</version>
+            </dependency>
+
+            <!--     es       -->
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-connector-elasticsearch6_2.11</artifactId>
+                <version>${flink-version}</version>
+            </dependency>
+
+            <!--  sql table  -->
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-table</artifactId>
+                <version>${flink-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-table-common</artifactId>
+                <version>${flink-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-table-planner_2.11</artifactId>
+                <version>${flink-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-table-api-java-bridge_2.11</artifactId>
+                <version>${flink-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-table-api-scala-bridge_2.11</artifactId>
+                <version>${flink-version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <build>
+        <!-- 插件管理器 -->
+        <pluginManagement>
+            <plugins>
+                <!-- 编译器插件 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>${java-compiler-version}</source>
+                        <target>${java-compiler-version}</target>
+                    </configuration>
+                </plugin>
+                <!-- 打包插件 - java -->
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${assembly-plugin-version}</version>
+                    <configuration>
+                        <descriptorRefs>
+                            <!-- 打好的jar以jar-with-dependencies结尾 -->
+                            <descriptorRef>jar-with-dependencies</descriptorRef>
+                        </descriptorRefs>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>make-assembly</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>single</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!-- scala编译的打包插件 -->
+                <plugin>
+                    <groupId>org.scala-tools</groupId>
+                    <artifactId>maven-scala-plugin</artifactId>
+                    <version>${scala-tools-version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>compile</goal>
+                                <goal>testCompile</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <scalaVersion>${scala-version}</scalaVersion>
+                        <args>
+                            <arg>-target:jvm-1.8</arg>
+                        </args>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
